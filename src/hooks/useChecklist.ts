@@ -68,5 +68,12 @@ export const useChecklist = () => {
         return groups;
     };
 
-    return { items, loading, toggleItem, getGroupedItems };
+    const clearAllChecklist = () => {
+        if (window.confirm("Tem certeza que deseja limpar todos os itens verificados?")) {
+            setItems(prev => prev.map(item => ({ ...item, checked: false })));
+            localStorage.removeItem(STORAGE_KEY);
+        }
+    };
+
+    return { items, loading, toggleItem, getGroupedItems, clearAllChecklist };
 };

@@ -34,7 +34,7 @@ body {
 
 .app-header {
   background-color: var(--white);
-  padding: 1.5rem 1rem;
+  padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
@@ -44,6 +44,14 @@ body {
   align-items: center;
   gap: 0.5rem;
   text-align: center;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
 }
 
 .app-logo {
@@ -275,4 +283,197 @@ body {
 
 .cta-button:active {
   background: var(--primary-dark);
+}
+
+/* Menu Styles */
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button:hover {
+  background-color: var(--border-color);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: flex-start;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.menu-content {
+  background-color: var(--white);
+  width: 80%;
+  max-width: 300px;
+  height: 100%;
+  padding: 1.5rem;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.menu-header h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-right: -0.5rem;
+  color: var(--text-muted);
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.menu-item:hover {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+}
+
+.menu-item.active {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.menu-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 1rem 0;
+}
+
+.delete-action {
+  color: #ef4444;
+  /* red-500 */
+}
+
+.delete-action:hover {
+  background-color: #fef2f2;
+  /* red-50 */
+  color: #dc2626;
+  /* red-600 */
+}
+
+/* Scales View Styles */
+.scales-container {
+  padding: 1rem;
+}
+
+.scales-container h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.scales-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--white);
+  font-size: 0.9rem;
+}
+
+.scales-table th {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.scales-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.scales-table tr:last-child td {
+  border-bottom: none;
+}
+
+.scales-table .date-cell {
+  font-weight: 600;
+  color: var(--primary-color);
+  white-space: nowrap;
 }
