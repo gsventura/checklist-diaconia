@@ -1,16 +1,16 @@
-import { Menu as MenuIcon, X, Calendar, ClipboardCheck, Trash2 } from 'lucide-react';
+import { Menu as MenuIcon, X, Calendar, ClipboardCheck, Trash2, Stethoscope } from 'lucide-react';
 import { useState } from 'react';
 
 interface MenuProps {
-    onNavigate: (view: 'checklist' | 'scales') => void;
+    onNavigate: (view: 'checklist' | 'scales' | 'doctor-scales') => void;
     onClear: () => void;
-    activeView: 'checklist' | 'scales';
+    activeView: 'checklist' | 'scales' | 'doctor-scales';
 }
 
 export const Menu = ({ onNavigate, onClear, activeView }: MenuProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleNavigate = (view: 'checklist' | 'scales') => {
+    const handleNavigate = (view: 'checklist' | 'scales' | 'doctor-scales') => {
         onNavigate(view);
         setIsOpen(false);
     };
@@ -59,6 +59,14 @@ export const Menu = ({ onNavigate, onClear, activeView }: MenuProps) => {
                             >
                                 <Calendar size={20} />
                                 <span>Escalas</span>
+                            </button>
+
+                            <button
+                                className={`menu-item ${activeView === 'doctor-scales' ? 'active' : ''}`}
+                                onClick={() => handleNavigate('doctor-scales')}
+                            >
+                                <Stethoscope size={20} />
+                                <span>Escala de Médicos</span>
                             </button>
 
                             <div className="menu-divider"></div>

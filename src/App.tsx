@@ -4,12 +4,13 @@ import { DateService } from './services/DateService';
 import { ChecklistItemComponent } from './components/ChecklistItem';
 import { Menu } from './components/Menu';
 import { ScalesView } from './components/ScalesView';
+import { DoctorScalesView } from './components/DoctorScalesView';
 import './index.css';
 
 function App() {
   const { items, loading, toggleItem, clearAllChecklist } = useChecklist();
   const [activeTab, setActiveTab] = useState<string>('DIÁCONO 1');
-  const [currentView, setCurrentView] = useState<'checklist' | 'scales'>('checklist');
+  const [currentView, setCurrentView] = useState<'checklist' | 'scales' | 'doctor-scales'>('checklist');
 
   const displayDate = DateService.getDisplayDate();
 
@@ -46,7 +47,7 @@ function App() {
         </div>
 
         <div className="header-text">
-          <h1>{currentView === 'checklist' ? 'Checklist - Diaconia' : 'Escalas - Diaconia'}</h1>
+          <h1>{currentView === 'checklist' ? 'Checklist - Diaconia' : currentView === 'scales' ? 'Escalas - Diaconia' : 'Escala de Médicos'}</h1>
           <p className="date-display">{displayDate}</p>
           {DateService.isFirstSundayOfMonth() && currentView === 'checklist' && (
             <div className="santa-ceia-warning" style={{
@@ -99,9 +100,13 @@ function App() {
             )}
           </main>
         </>
-      ) : (
+      ) : currentView === 'scales' ? (
         <main className="scales-view">
           <ScalesView />
+        </main>
+      ) : (
+        <main className="scales-view">
+          <DoctorScalesView />
         </main>
       )}
 
