@@ -1,22 +1,31 @@
-import { Menu as MenuIcon, X, Calendar, ClipboardCheck, Trash2, Stethoscope } from 'lucide-react';
+import { Menu as MenuIcon, X, Calendar, ClipboardCheck, Trash2, Stethoscope, Users, Repeat, Siren } from 'lucide-react';
 import { useState } from 'react';
 
+export type AppView = 'checklist' | 'scales' | 'doctor-scales' | 'counter' | 'codigo-vermelho';
+
 interface MenuProps {
-    onNavigate: (view: 'checklist' | 'scales' | 'doctor-scales') => void;
+    onNavigate: (view: AppView) => void;
     onClear: () => void;
-    activeView: 'checklist' | 'scales' | 'doctor-scales';
+    onChangeScale: () => void;
+    activeView: AppView;
+    hasScale: boolean;
 }
 
-export const Menu = ({ onNavigate, onClear, activeView }: MenuProps) => {
+export const Menu = ({ onNavigate, onClear, onChangeScale, activeView, hasScale }: MenuProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleNavigate = (view: 'checklist' | 'scales' | 'doctor-scales') => {
+    const handleNavigate = (view: AppView) => {
         onNavigate(view);
         setIsOpen(false);
     };
 
     const handleClear = () => {
         onClear();
+        setIsOpen(false);
+    };
+
+    const handleChangeScale = () => {
+        onChangeScale();
         setIsOpen(false);
     };
 
@@ -53,6 +62,24 @@ export const Menu = ({ onNavigate, onClear, activeView }: MenuProps) => {
                                 <span>Checklist</span>
                             </button>
 
+                            {hasScale && (
+                                <button
+                                    className="menu-item"
+                                    onClick={handleChangeScale}
+                                >
+                                    <Repeat size={20} />
+                                    <span>Trocar Escala</span>
+                                </button>
+                            )}
+
+                            <button
+                                className={`menu-item ${activeView === 'counter' ? 'active' : ''}`}
+                                onClick={() => handleNavigate('counter')}
+                            >
+                                <Users size={20} />
+                                <span>Contador de Pessoas</span>
+                            </button>
+
                             <button
                                 className={`menu-item ${activeView === 'scales' ? 'active' : ''}`}
                                 onClick={() => handleNavigate('scales')}
@@ -70,6 +97,14 @@ export const Menu = ({ onNavigate, onClear, activeView }: MenuProps) => {
                             </button>
 
                             <div className="menu-divider"></div>
+
+                            <button
+                                className={`menu-item emergency-action ${activeView === 'codigo-vermelho' ? 'active' : ''}`}
+                                onClick={() => handleNavigate('codigo-vermelho')}
+                            >
+                                <Siren size={20} />
+                                <span>🚨 Código Vermelho</span>
+                            </button>
 
                             <button
                                 className="menu-item delete-action"
